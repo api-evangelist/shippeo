@@ -1,0 +1,145 @@
+aid: shippeo
+url: https://raw.githubusercontent.com/api-evangelist/shippeo/refs/heads/main/apis.yml
+name: Shippeo
+kind: company
+description: Shippeo is a real-time transportation and multimodal supply-chain
+  visibility platform, giving shippers, carriers, and logistics teams predictive
+  and real-time information for all their deliveries across road, rail, sea, and
+  air. Through its developer portal (developers.shippeo.com) Shippeo exposes REST
+  APIs and webhooks so TMS, ERP, and control-tower systems can submit transport
+  orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs,
+  statuses, and milestone events, and subscribe to real-time "Events-out"
+  notifications. API access is enterprise and customer-provisioned - applications
+  and OAuth2 client IDs are created in the portal after contracting with Shippeo.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Supply Chain
+- Transportation Visibility
+- Real-Time Visibility
+- Logistics
+- Shipment Tracking
+- ETA
+- Freight
+- Supply Chain Visibility
+- SaaS
+created: '2026-07-12'
+modified: '2026-07-12'
+specificationVersion: '0.19'
+apis:
+- aid: shippeo:shippeo-transport-orders-api
+  name: Shippeo Transport Orders API
+  tags:
+  - Transport Orders
+  - Shipment Tracking
+  - Logistics
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.shippeo.com/catalog/all
+  baseURL: https://api.shippeo.com
+  properties:
+  - url: https://developers.shippeo.com
+    type: Documentation
+  - url: https://developers.shippeo.com/catalog/all
+    type: APIReference
+  - url: openapi/shippeo-openapi.yml
+    type: OpenAPI
+  - url: collections/shippeo.postman_collection.json
+    type: PostmanCollection
+  - url: collections/shippeo.opencollection.json
+    type: OpenCollection
+  description: Submit and manage transport orders (tours) for real-time tracking -
+    origin, destination, stops, references, carrier, and planned times - which
+    Shippeo enriches with predictive ETAs and milestone events. Operation paths
+    are modeled from Shippeo's public product documentation; the exact Swagger is
+    behind the developer-portal login.
+- aid: shippeo:shippeo-positions-api
+  name: Shippeo Positions API
+  tags:
+  - Positions
+  - Geolocation
+  - Telematics
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.shippeo.com/catalog/all
+  baseURL: https://api.shippeo.com
+  properties:
+  - url: https://developers.shippeo.com
+    type: Documentation
+  - url: openapi/shippeo-openapi.yml
+    type: OpenAPI
+  - url: collections/shippeo.postman_collection.json
+    type: PostmanCollection
+  - url: collections/shippeo.opencollection.json
+    type: OpenCollection
+  description: Carrier position feed - submit GPS positions (latitude, longitude,
+    timestamp) for vehicles and transports, and retrieve a transport's position
+    history, so Shippeo can track shipments and recompute predictive ETAs. Paths
+    modeled from public documentation.
+- aid: shippeo:shippeo-eta-status-api
+  name: Shippeo ETA and Status API
+  tags:
+  - ETA
+  - Real-Time Visibility
+  - Events
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.shippeo.com/catalog/all
+  baseURL: https://api.shippeo.com
+  properties:
+  - url: https://developers.shippeo.com
+    type: Documentation
+  - url: openapi/shippeo-openapi.yml
+    type: OpenAPI
+  - url: collections/shippeo.postman_collection.json
+    type: PostmanCollection
+  - url: collections/shippeo.opencollection.json
+    type: OpenCollection
+  description: Retrieve Shippeo's predictive ETAs, current statuses, and milestone
+    events (site arrival/departure) for tracked transports - the pull side of the
+    "Events-out" product, blended from carrier positions, routing, and historical
+    patterns. The /health probe is the one endpoint confirmed live; other paths
+    are modeled.
+- aid: shippeo:shippeo-event-subscriptions-api
+  name: Shippeo Event Subscriptions (Events-out Webhooks) API
+  tags:
+  - Webhooks
+  - Events
+  - Real-Time Visibility
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.shippeo.com/catalog/all
+  baseURL: https://api.shippeo.com
+  properties:
+  - url: https://developers.shippeo.com
+    type: Documentation
+  - url: openapi/shippeo-openapi.yml
+    type: OpenAPI
+  - url: collections/shippeo.postman_collection.json
+    type: PostmanCollection
+  - url: collections/shippeo.opencollection.json
+    type: OpenCollection
+  description: Manage Events-out webhook subscriptions - register callback URLs and
+    event types (status changes, ETA updates, milestone events, carbon-emissions
+    data) so Shippeo POSTs real-time notifications to your systems. Webhook
+    delivery is a confirmed part of Shippeo's integration model; the subscription
+    management paths are modeled.
+common:
+- type: DomainSecurity
+  url: security/shippeo-domain-security.yml
+- type: Authentication
+  url: authentication/shippeo-authentication.yml
+- type: Website
+  url: https://www.shippeo.com
+- type: Documentation
+  url: https://developers.shippeo.com
+- type: SignUp
+  url: https://developers.shippeo.com
+- type: StatusPage
+  url: https://shippeo.statuspage.io
+- type: LinkedIn
+  url: https://www.linkedin.com/company/shippeo
+- type: Plans
+  url: plans/shippeo-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/shippeo-rate-limits.yml
+- type: FinOps
+  url: finops/shippeo-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

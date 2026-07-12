@@ -1,0 +1,143 @@
+{
+  "info": {
+    "name": "Shippeo Real-Time Transportation Visibility API",
+    "description": "Modeled Postman collection for Shippeo's real-time transportation visibility API. Base host https://api.shippeo.com is CONFIRMED live (GET /health returns 200 JSON); all other operation paths are MODELED from Shippeo's public product documentation because the exact Swagger is behind the developers.shippeo.com portal login. Authentication is OAuth2 client-credentials (create an application in the portal to get a client_id/client_secret), and the resulting access token is sent as an HTTP Bearer token. Enterprise, customer-provisioned access.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.shippeo.com", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Service health check (CONFIRMED live)",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] },
+            "description": "Public health probe. Confirmed live - returns {\"http-server\":{\"healthy\":true}}."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transport Orders (modeled)",
+      "item": [
+        {
+          "name": "List transport orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/transport-orders?page=1&pageSize=50", "host": ["{{baseUrl}}"], "path": ["transport-orders"], "query": [{ "key": "page", "value": "1" }, { "key": "pageSize", "value": "50" }] },
+            "description": "MODELED. Lists transport orders (tours) submitted for tracking."
+          }
+        },
+        {
+          "name": "Create a transport order",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"references\": [\"PO-12345\"],\n  \"carrier\": \"acme-transport\",\n  \"transportMode\": \"road\",\n  \"stops\": [\n    { \"type\": \"pickup\", \"name\": \"Warehouse A\", \"address\": \"Lyon, FR\", \"plannedStart\": \"2026-07-13T08:00:00Z\" },\n    { \"type\": \"delivery\", \"name\": \"DC B\", \"address\": \"Hamburg, DE\", \"plannedStart\": \"2026-07-14T14:00:00Z\" }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/transport-orders", "host": ["{{baseUrl}}"], "path": ["transport-orders"] },
+            "description": "MODELED. Submits a new transport order for Shippeo to track."
+          }
+        },
+        {
+          "name": "Get a transport order",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/transport-orders/:id", "host": ["{{baseUrl}}"], "path": ["transport-orders", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "MODELED. Retrieves a single transport order by identifier."
+          }
+        },
+        {
+          "name": "Update a transport order",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/transport-orders/:id", "host": ["{{baseUrl}}"], "path": ["transport-orders", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "MODELED. Updates an existing transport order."
+          }
+        },
+        {
+          "name": "Get predictive ETA",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/transport-orders/:id/eta", "host": ["{{baseUrl}}"], "path": ["transport-orders", ":id", "eta"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "MODELED. Returns predictive ETA and status for a transport order."
+          }
+        },
+        {
+          "name": "List positions for a transport",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/transport-orders/:id/positions", "host": ["{{baseUrl}}"], "path": ["transport-orders", ":id", "positions"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "MODELED. Returns the geolocation position history for a tracked transport."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Positions (modeled)",
+      "item": [
+        {
+          "name": "Submit a position",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"transportOrderId\": \"\",\n  \"vehicleId\": \"TRK-01\",\n  \"latitude\": 48.8566,\n  \"longitude\": 2.3522,\n  \"timestamp\": \"2026-07-13T09:30:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/positions", "host": ["{{baseUrl}}"], "path": ["positions"] },
+            "description": "MODELED. Carrier position feed - submits a GPS position for a vehicle or transport."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Event Subscriptions / Events-out (modeled)",
+      "item": [
+        {
+          "name": "List event subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/event-subscriptions", "host": ["{{baseUrl}}"], "path": ["event-subscriptions"] },
+            "description": "MODELED. Lists Events-out webhook subscriptions."
+          }
+        },
+        {
+          "name": "Create an event subscription",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"callbackUrl\": \"https://example.com/shippeo/webhook\",\n  \"eventTypes\": [\"status.changed\", \"eta.updated\", \"milestone.reached\"]\n}" },
+            "url": { "raw": "{{baseUrl}}/event-subscriptions", "host": ["{{baseUrl}}"], "path": ["event-subscriptions"] },
+            "description": "MODELED. Registers a webhook callback URL and the event types to receive."
+          }
+        },
+        {
+          "name": "Delete an event subscription",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/event-subscriptions/:id", "host": ["{{baseUrl}}"], "path": ["event-subscriptions", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "MODELED. Removes a webhook event subscription."
+          }
+        }
+      ]
+    }
+  ]
+}

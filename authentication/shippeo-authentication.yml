@@ -1,0 +1,33 @@
+generated: '2026-07-12'
+method: researched
+source: developers.shippeo.com portal + public product documentation
+summary:
+  types:
+  - oauth2
+  - http
+schemes:
+- name: oauth2ClientCredentials
+  type: oauth2
+  flow: clientCredentials
+  description: >-
+    OAuth2 client-credentials. A client_id / client_secret pair is issued when
+    you create an application in the Shippeo Developer Portal (each application
+    corresponds to an API user / clientID). The client credentials are
+    exchanged for an access token, which is then presented on API calls. The
+    exact token endpoint is documented in the login-gated portal and is not
+    reproduced here.
+  sources:
+  - https://developers.shippeo.com/
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: >-
+    The OAuth2 access token is presented on each request as
+    `Authorization: Bearer ACCESS_TOKEN`.
+  sources:
+  - openapi/shippeo-openapi.yml
+notes: >-
+  Shippeo is enterprise, customer-provisioned - API credentials require a
+  contracted account. Shippeo additionally supports SSO with just-in-time (JIT)
+  user provisioning for platform/portal users, which is a login mechanism for
+  humans rather than an API authentication scheme.

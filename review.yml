@@ -1,0 +1,102 @@
+aid: shippeo
+name: Shippeo
+review:
+  question: Does Shippeo expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Shippeo's documented integration surface
+    is request/response REST over HTTPS plus outbound webhooks ("Events-out").
+    Real-time delivery to customers is done by Shippeo POSTing event callbacks
+    to subscriber-provided HTTPS URLs, not by a server-push socket that clients
+    hold open. No WebSocket (ws:// or wss://) or SSE endpoint is documented on
+    Shippeo's own API, so there is no server-push transport of Shippeo's to
+    model in AsyncAPI. Webhook payload shapes are represented in the OpenAPI
+    `webhooks` block instead.
+findings:
+  summary: |
+    Shippeo does not publish a documented public WebSocket API. Shippeo is a
+    real-time transportation / multimodal supply-chain visibility platform. Its
+    public developer surface lives in a login-gated portal at
+    developers.shippeo.com (a Redoc/Swagger-based portal) and consists of REST
+    APIs and outbound webhooks. Confirmed live production API host is
+    https://api.shippeo.com (its /health endpoint returns
+    {"http-server":{"healthy":true}} over TLS 1.3, fronted by a Google load
+    balancer). Authentication is OAuth2 client-credentials issuing an HTTP
+    Bearer access token; applications / client IDs are provisioned per customer
+    inside the portal. The platform lets shippers, carriers, and TMS/ERP/
+    control-tower systems submit transport orders (tours), feed GPS positions,
+    retrieve predictive ETAs, statuses, and milestone events, and subscribe to
+    real-time "Events-out" webhook notifications (including carbon-emissions
+    data for enterprise customers). No realtime bidirectional or streaming
+    WebSocket endpoint is documented anywhere in Shippeo's public materials.
+  accessModel: |
+    Enterprise, customer-provisioned. There is no self-service signup or public
+    API pricing. API access requires a contracted Shippeo account; developer
+    portal access grants the full Swagger definitions, which are not public.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.shippeo.com
+      documented: true
+      note: >-
+        Host confirmed live via GET /health (200 JSON). Individual operation
+        paths are login-gated and are modeled in this entry from Shippeo's
+        public product documentation, not copied from the private Swagger.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: >-
+        Events-out delivery. Shippeo POSTs status changes, ETA updates, and
+        milestone events to subscriber-provided callback URLs. Server-to-URL
+        HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Shippeo's public developer materials as of the review date.
+  endpointsConfirmed:
+    - GET https://api.shippeo.com/health
+  endpointsModeled:
+    - GET    https://api.shippeo.com/transport-orders
+    - POST   https://api.shippeo.com/transport-orders
+    - GET    https://api.shippeo.com/transport-orders/{id}
+    - PATCH  https://api.shippeo.com/transport-orders/{id}
+    - GET    https://api.shippeo.com/transport-orders/{id}/eta
+    - GET    https://api.shippeo.com/transport-orders/{id}/positions
+    - POST   https://api.shippeo.com/positions
+    - GET    https://api.shippeo.com/event-subscriptions
+    - POST   https://api.shippeo.com/event-subscriptions
+    - DELETE https://api.shippeo.com/event-subscriptions/{id}
+  authentication: |
+    OAuth2 client-credentials (client_id / client_secret) obtained by creating
+    an application in the Shippeo Developer Portal; the resulting access token
+    is presented as an HTTP Authorization: Bearer header. Shippeo also supports
+    SSO with just-in-time user provisioning for portal/platform users.
+sources:
+  - url: https://developers.shippeo.com/
+    type: Documentation
+    note: Login-gated developer portal (Redoc/Swagger). Applications correspond to an API user / clientID.
+  - url: https://developers.shippeo.com/catalog/all
+    type: APIReference
+    note: API catalog (SPA, renders client-side; requires portal access for full Swagger).
+  - url: https://api.shippeo.com/health
+    type: API
+    note: Live health probe - returns {"http-server":{"healthy":true}} 200 JSON over TLS 1.3. Confirms the production API host.
+  - url: https://www.shippeo.com/
+    type: Website
+    note: Product marketing - real-time visibility across road, rail, sea, air; predictive ETAs; Integration APIs + Webhooks; Events-out.
+  - url: https://shippeo.statuspage.io
+    type: StatusPage
+    note: Public status page.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on Shippeo's own API. Shippeo's public
+    surface is request/response REST (host confirmed live at api.shippeo.com)
+    plus outbound Events-out webhooks. No AsyncAPI document was created because
+    there is no server-push socket transport to model; webhook payloads are
+    represented in the OpenAPI webhooks block. Operation paths are modeled and
+    flagged because the exact Swagger is behind the portal login.

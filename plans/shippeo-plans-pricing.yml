@@ -1,0 +1,62 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Shippeo
+providerId: shippeo
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Supply Chain
+- Transportation Visibility
+- Real-Time Visibility
+- Logistics
+- SaaS
+- Plans
+description: >-
+  Shippeo is enterprise SaaS sold through sales and contracted per customer.
+  There is no self-service tier and no public, published price for the platform
+  or its APIs. Packaging is quote-based and typically scoped by modules
+  (predictive visibility, multimodal network, carbon/CO2 reporting, control
+  tower), tracked volume, transport modes, and integration needs. API access
+  (Transport Orders, Positions, ETA/Status, Events-out webhooks) is included
+  with a Shippeo subscription rather than sold as a standalone metered API
+  product. Exact rates are not reconciled here and must be obtained from
+  Shippeo sales.
+notes: >-
+  No public pricing page exists for Shippeo. Contact Shippeo sales for a quote.
+  Values below are structural placeholders, not confirmed prices.
+sources:
+- https://www.shippeo.com/
+- https://developers.shippeo.com/
+plans:
+- id: shippeo-enterprise
+  name: Enterprise (Contact Sales)
+  type: enterprise
+  description: >-
+    Contracted enterprise subscription to the Shippeo platform, scoped to the
+    modules, transport modes, and tracked volume a customer needs. Includes
+    developer-portal access with OAuth2 applications / client IDs and the
+    Transport Orders, Positions, ETA/Status, and Events-out (webhook) APIs.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Real-Time Multimodal Visibility
+  - name: Predictive ETAs
+  - name: Transport Orders API
+  - name: Positions API
+  - name: ETA and Status API
+  - name: Events-out Webhooks
+  - name: Developer Portal Access
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

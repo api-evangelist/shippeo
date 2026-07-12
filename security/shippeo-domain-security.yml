@@ -1,0 +1,49 @@
+generated: '2026-07-12'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: developers.shippeo.com
+  https: true
+  tls_version: TLSv1.3
+  cert_subject: developers.shippeo.com
+  cert_expires: Oct  1 20:46:16 2026 GMT
+  http_status: 200
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  note: Developer portal (SPA; Redoc/Swagger-based).
+- host: api.shippeo.com
+  https: true
+  tls_version: TLSv1.3
+  cert_subject: '*.shippeo.com'
+  cert_expires: Sep 10 12:41:38 2026 GMT
+  http_status: 404
+  health_status: 200
+  hsts: false
+  note: Production API host, fronted by a Google load balancer. GET /health returns {"http-server":{"healthy":true}}; root returns 404.
+- host: www.shippeo.com
+  https: true
+  tls_version: TLSv1.3
+  cert_subject: www.shippeo.com
+  cert_expires: Oct  1 07:09:18 2026 GMT
+  http_status: 200
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: false
+- host: shippeo.com
+  https: true
+  tls_version: TLSv1.3
+  cert_subject: shippeo.com
+  cert_expires: Sep  6 18:19:05 2026 GMT
+  http_status: 301
+  redirect: https://www.shippeo.com/
+domains:
+- domain: shippeo.com
+  dnssec: false
+  caa: []
+  spf: true
+  spf_record: 'v=spf1 a include:_spf.google.com include:6849930.spf04.hubspotemail.net include:mailgun.org mx ~all'
+  dmarc: true
+  dmarc_policy: quarantine
+  dmarc_pct: 1
+  dmarc_rua: mailto:webmaster@shippeo.com

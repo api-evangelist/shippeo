@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shippeo Real-Time Transportation Visibility API",
+    "version": "1.0",
+    "description": "Modeled collection. Host https://api.shippeo.com is confirmed live (GET /health returns 200 JSON); other paths are modeled from Shippeo's public documentation because the portal Swagger is login-gated. OAuth2 client-credentials issues a Bearer access token."
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{accessToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Health", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Service health check (CONFIRMED live).", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.shippeo.com/health", "auth": { "type": "none" } },
+          "docs": "Public health probe. Confirmed live - returns {\"http-server\":{\"healthy\":true}}."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Transport Orders (modeled)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List transport orders.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shippeo.com/transport-orders?page=1&pageSize=50",
+            "params": [
+              { "name": "page", "value": "1", "type": "query", "description": "Page number." },
+              { "name": "pageSize", "value": "50", "type": "query", "description": "Results per page." }
+            ]
+          },
+          "docs": "MODELED. Lists transport orders (tours) submitted for tracking."
+        },
+        {
+          "info": { "name": "Create a transport order.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shippeo.com/transport-orders",
+            "body": { "type": "json", "data": "{\n  \"references\": [\"PO-12345\"],\n  \"carrier\": \"acme-transport\",\n  \"transportMode\": \"road\",\n  \"stops\": []\n}" }
+          },
+          "docs": "MODELED. Submits a new transport order for Shippeo to track."
+        },
+        {
+          "info": { "name": "Get a transport order.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shippeo.com/transport-orders/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "Transport order identifier." } ]
+          },
+          "docs": "MODELED. Retrieves a single transport order by identifier."
+        },
+        {
+          "info": { "name": "Update a transport order.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.shippeo.com/transport-orders/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "Transport order identifier." } ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "MODELED. Updates an existing transport order."
+        },
+        {
+          "info": { "name": "Get predictive ETA.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shippeo.com/transport-orders/:id/eta",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "Transport order identifier." } ]
+          },
+          "docs": "MODELED. Returns predictive ETA and status for a transport order."
+        },
+        {
+          "info": { "name": "List positions for a transport.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shippeo.com/transport-orders/:id/positions",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "Transport order identifier." } ]
+          },
+          "docs": "MODELED. Returns the geolocation position history for a tracked transport."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Positions (modeled)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Submit a position.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shippeo.com/positions",
+            "body": { "type": "json", "data": "{\n  \"vehicleId\": \"TRK-01\",\n  \"latitude\": 48.8566,\n  \"longitude\": 2.3522,\n  \"timestamp\": \"2026-07-13T09:30:00Z\"\n}" }
+          },
+          "docs": "MODELED. Carrier position feed - submits a GPS position for a vehicle or transport."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Event Subscriptions / Events-out (modeled)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List event subscriptions.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.shippeo.com/event-subscriptions" },
+          "docs": "MODELED. Lists Events-out webhook subscriptions."
+        },
+        {
+          "info": { "name": "Create an event subscription.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shippeo.com/event-subscriptions",
+            "body": { "type": "json", "data": "{\n  \"callbackUrl\": \"https://example.com/shippeo/webhook\",\n  \"eventTypes\": [\"status.changed\", \"eta.updated\", \"milestone.reached\"]\n}" }
+          },
+          "docs": "MODELED. Registers a webhook callback URL and the event types to receive."
+        },
+        {
+          "info": { "name": "Delete an event subscription.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.shippeo.com/event-subscriptions/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "Subscription identifier." } ]
+          },
+          "docs": "MODELED. Removes a webhook event subscription."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

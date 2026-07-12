@@ -1,0 +1,53 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Shippeo
+providerId: shippeo
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Supply Chain
+- Transportation Visibility
+- Logistics
+- Rate Limiting
+- Quotas
+description: >-
+  Shippeo does not publish fixed numeric API rate limits in public materials.
+  Any per-application throttling, quotas, or fair-use limits are documented in
+  the login-gated developer portal and governed per contract / per application
+  (clientID). Standard HTTP 429 handling with exponential backoff should be
+  assumed for a production integration.
+notes: >-
+  Numeric per-endpoint or per-application limits are not publicly documented as
+  of the review date. Confirm applicable limits in the Shippeo Developer Portal
+  or with Shippeo for your contracted applications.
+sources:
+- https://developers.shippeo.com/
+- https://www.shippeo.com/
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: application
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is publicly documented; governed per application / contract.
+- name: Position Feed
+  scope: application
+  metric: positions
+  limit: not published
+  notes: Carrier position submission throughput is not publicly documented.
+- name: Events-out Webhooks
+  scope: subscription
+  metric: events
+  limit: not published
+  notes: Outbound webhook delivery volume follows tracked-transport activity; no public cap documented.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Webhook Retries
+  description: Outbound Events-out webhooks should be treated as at-least-once; receivers should be idempotent and return 2xx promptly.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
