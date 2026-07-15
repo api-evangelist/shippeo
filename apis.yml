@@ -120,6 +120,8 @@ apis:
     delivery is a confirmed part of Shippeo's integration model; the subscription
     management paths are modeled.
 common:
+- type: AgenticAccess
+  url: agentic-access/shippeo-agentic-access.yml
 - type: DomainSecurity
   url: security/shippeo-domain-security.yml
 - type: Authentication
