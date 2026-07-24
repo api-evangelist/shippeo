@@ -1,0 +1,240 @@
+openapi: 3.0.3
+info:
+  title: Shippeo Real-Time Transportation Visibility ETA and Status Transport Orders API
+  description: 'Shippeo is a real-time transportation and multimodal supply-chain visibility platform. Its public developer surface - documented in the login-gated Shippeo Developer Portal at developers.shippeo.com (a Redoc/Swagger-based portal) - lets carriers, shippers, TMS/ERP systems, and control towers submit transport orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs, statuses, and milestone events, and subscribe to real-time "Events-out" notifications via webhooks. Carbon emissions data for tracked shipments is also delivered through the Events-out API for enterprise customers.
+
+    ACCESS MODEL: Shippeo is enterprise, customer-provisioned SaaS. API access requires a contracted Shippeo account; applications and client IDs are created in the developer portal and calls are authenticated with an OAuth2 (client-credentials) access token presented as an HTTP Bearer token.
+
+    GROUNDING NOTE: The live API host `https://api.shippeo.com` is confirmed (its `/health` endpoint responds `{"http-server":{"healthy":true}}`), as are OAuth2 Bearer authentication, webhook delivery, and the Events-out product. The individual operation PATHS and REQUEST/RESPONSE SCHEMAS below are MODELED from Shippeo''s public product/marketing documentation because the exact Swagger definitions are behind the portal login; they illustrate the documented capabilities and are not byte-for-byte copies of Shippeo''s private specs. Treat paths as representative, not verified.'
+  version: '1.0'
+  contact:
+    name: Shippeo Developer Portal
+    url: https://developers.shippeo.com
+  x-grounding:
+    confirmed:
+    - host https://api.shippeo.com (live; /health returns 200 JSON)
+    - OAuth2 client-credentials issuing Bearer access tokens
+    - webhook / Events-out event delivery
+    - real-time tracking across road, rail, sea, and air with predictive ETAs
+    modeled:
+    - all operation paths and JSON schemas (portal Swagger is login-gated)
+servers:
+- url: https://api.shippeo.com
+  description: Shippeo production API host (host confirmed live; paths modeled)
+security:
+- bearerAuth: []
+tags:
+- name: Transport Orders
+  description: Submit and manage transport orders (tours) for real-time tracking.
+paths:
+  /transport-orders:
+    get:
+      operationId: listTransportOrders
+      tags:
+      - Transport Orders
+      summary: List transport orders
+      description: MODELED. Lists transport orders (tours) submitted for tracking, with their current status, carrier, and ETA. Exact path and query parameters are defined in the login-gated portal Swagger.
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 50
+      - name: status
+        in: query
+        required: false
+        description: Filter by transport status.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A page of transport orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TransportOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createTransportOrder
+      tags:
+      - Transport Orders
+      summary: Create a transport order
+      description: MODELED. Submits a new transport order (tour) - origin, destination, stops, references, carrier, and planned times - for Shippeo to track and enrich with predictive ETAs and events.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransportOrderInput'
+      responses:
+        '201':
+          description: The created transport order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransportOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /transport-orders/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getTransportOrder
+      tags:
+      - Transport Orders
+      summary: Get a transport order
+      description: MODELED. Retrieves a single transport order by its identifier.
+      responses:
+        '200':
+          description: The requested transport order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransportOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateTransportOrder
+      tags:
+      - Transport Orders
+      summary: Update a transport order
+      description: MODELED. Updates an existing transport order (references, stops, planned times).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransportOrderInput'
+      responses:
+        '200':
+          description: The updated transport order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransportOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+components:
+  schemas:
+    Stop:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - pickup
+          - delivery
+        name:
+          type: string
+        address:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        plannedStart:
+          type: string
+          format: date-time
+        plannedEnd:
+          type: string
+          format: date-time
+    TransportOrder:
+      allOf:
+      - $ref: '#/components/schemas/TransportOrderInput'
+      - type: object
+        properties:
+          id:
+            type: string
+          status:
+            type: string
+            description: Current transport status.
+          createdAt:
+            type: string
+            format: date-time
+    TransportOrderInput:
+      type: object
+      required:
+      - references
+      - stops
+      properties:
+        references:
+          type: array
+          description: Customer references / shipment numbers for the transport.
+          items:
+            type: string
+        carrier:
+          type: string
+          description: Identifier or name of the carrier operating the transport.
+        transportMode:
+          type: string
+          enum:
+          - road
+          - rail
+          - sea
+          - air
+        stops:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stop'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: Resource identifier.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'HTTP Bearer access token. Tokens are issued via OAuth2 client credentials (client_id / client_secret) obtained by creating an application in the Shippeo Developer Portal. Presented as `Authorization: Bearer ACCESS_TOKEN`.'

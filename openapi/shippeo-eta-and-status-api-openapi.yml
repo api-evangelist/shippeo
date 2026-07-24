@@ -1,0 +1,115 @@
+openapi: 3.0.3
+info:
+  title: Shippeo Real-Time Transportation Visibility ETA and Status API
+  description: 'Shippeo is a real-time transportation and multimodal supply-chain visibility platform. Its public developer surface - documented in the login-gated Shippeo Developer Portal at developers.shippeo.com (a Redoc/Swagger-based portal) - lets carriers, shippers, TMS/ERP systems, and control towers submit transport orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs, statuses, and milestone events, and subscribe to real-time "Events-out" notifications via webhooks. Carbon emissions data for tracked shipments is also delivered through the Events-out API for enterprise customers.
+
+    ACCESS MODEL: Shippeo is enterprise, customer-provisioned SaaS. API access requires a contracted Shippeo account; applications and client IDs are created in the developer portal and calls are authenticated with an OAuth2 (client-credentials) access token presented as an HTTP Bearer token.
+
+    GROUNDING NOTE: The live API host `https://api.shippeo.com` is confirmed (its `/health` endpoint responds `{"http-server":{"healthy":true}}`), as are OAuth2 Bearer authentication, webhook delivery, and the Events-out product. The individual operation PATHS and REQUEST/RESPONSE SCHEMAS below are MODELED from Shippeo''s public product/marketing documentation because the exact Swagger definitions are behind the portal login; they illustrate the documented capabilities and are not byte-for-byte copies of Shippeo''s private specs. Treat paths as representative, not verified.'
+  version: '1.0'
+  contact:
+    name: Shippeo Developer Portal
+    url: https://developers.shippeo.com
+  x-grounding:
+    confirmed:
+    - host https://api.shippeo.com (live; /health returns 200 JSON)
+    - OAuth2 client-credentials issuing Bearer access tokens
+    - webhook / Events-out event delivery
+    - real-time tracking across road, rail, sea, and air with predictive ETAs
+    modeled:
+    - all operation paths and JSON schemas (portal Swagger is login-gated)
+servers:
+- url: https://api.shippeo.com
+  description: Shippeo production API host (host confirmed live; paths modeled)
+security:
+- bearerAuth: []
+tags:
+- name: ETA and Status
+  description: Retrieve predictive ETAs, statuses, and milestone events (Events-out, pull).
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      tags:
+      - ETA and Status
+      summary: Service health check
+      description: Public health probe. CONFIRMED live - responds with a small JSON body such as `{"http-server":{"healthy":true}}`. This is the only endpoint verified without authentication; all others below are modeled.
+      security: []
+      responses:
+        '200':
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /transport-orders/{id}/eta:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getTransportOrderEta
+      tags:
+      - ETA and Status
+      summary: Get predictive ETA
+      description: MODELED. Returns Shippeo's predictive ETA and current status for a transport order, blended from carrier positions, routing, and historical patterns.
+      responses:
+        '200':
+          description: Predictive ETA and status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Eta'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: Resource identifier.
+      schema:
+        type: string
+  schemas:
+    Eta:
+      type: object
+      properties:
+        transportOrderId:
+          type: string
+        eta:
+          type: string
+          format: date-time
+        status:
+          type: string
+        confidence:
+          type: string
+          description: Qualitative confidence in the predictive ETA.
+        delayMinutes:
+          type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'HTTP Bearer access token. Tokens are issued via OAuth2 client credentials (client_id / client_secret) obtained by creating an application in the Shippeo Developer Portal. Presented as `Authorization: Bearer ACCESS_TOKEN`.'
