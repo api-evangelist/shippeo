@@ -1,0 +1,20 @@
+{
+  "provider": "shippeo",
+  "sources": [
+    "shippeo-eta-and-status-api-openapi.yml",
+    "shippeo-event-subscriptions-api-openapi.yml",
+    "shippeo-positions-api-openapi.yml",
+    "shippeo-transport-orders-api-openapi.yml"
+  ],
+  "outputs": [
+    "shippeo-eta-and-status-api-openapi.yml",
+    "shippeo-event-subscriptions-api-openapi.yml",
+    "shippeo-positions-api-openapi.yml",
+    "shippeo-transport-orders-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
