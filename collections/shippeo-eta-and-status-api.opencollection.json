@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shippeo Real-Time Transportation Visibility ETA and Status API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ETA and Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Service health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shippeo.com/health"
+          },
+          "docs": "Public health probe. CONFIRMED live - responds with a small JSON body such as `{\"http-server\":{\"healthy\":true}}`. This is the only endpoint verified without authentication; all others below are modeled."
+        },
+        {
+          "info": {
+            "name": "Get predictive ETA",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shippeo.com/transport-orders/:id/eta",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource identifier."
+              }
+            ]
+          },
+          "docs": "MODELED. Returns Shippeo's predictive ETA and current status for a transport order, blended from carrier positions, routing, and historical patterns."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

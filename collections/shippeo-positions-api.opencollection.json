@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shippeo Real-Time Transportation Visibility ETA and Status Positions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Positions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List positions for a transport",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shippeo.com/transport-orders/:id/positions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource identifier."
+              }
+            ]
+          },
+          "docs": "MODELED. Returns the geolocation position history for a tracked transport."
+        },
+        {
+          "info": {
+            "name": "Submit a position",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shippeo.com/positions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "MODELED. Carrier position feed - submits a GPS position (latitude, longitude, timestamp) for a vehicle or transport so Shippeo can track it and recompute ETAs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

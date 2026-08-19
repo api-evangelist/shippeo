@@ -1,0 +1,903 @@
+{
+  "item": [
+    {
+      "id": "0d1040ac-14e9-4b10-9839-dae1799d4cbd",
+      "name": "Transport Orders",
+      "description": {
+        "content": "Submit and manage transport orders (tours) for real-time tracking.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "88e487f4-2e35-466a-beb0-cd8a1b3ae2af",
+          "name": "List transport orders",
+          "request": {
+            "name": "List transport orders",
+            "description": {
+              "content": "MODELED. Lists transport orders (tours) submitted for tracking, with their current status, carrier, and ETA. Exact path and query parameters are defined in the login-gated portal Swagger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transport-orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by transport status."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c58c340f-2c0d-4636-8b90-0fa84299f59c",
+              "name": "A page of transport orders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"references\": [\n        \"string\",\n        \"string\"\n      ],\n      \"stops\": [\n        {\n          \"type\": \"pickup\",\n          \"name\": \"string\",\n          \"address\": \"string\",\n          \"latitude\": 9919.675874287903,\n          \"longitude\": 920.1900643200278,\n          \"plannedStart\": \"2018-03-02T18:41:46.509Z\",\n          \"plannedEnd\": \"1989-08-26T00:50:46.404Z\"\n        },\n        {\n          \"type\": \"delivery\",\n          \"name\": \"string\",\n          \"address\": \"string\",\n          \"latitude\": 1285.8352201256619,\n          \"longitude\": 6873.345962260606,\n          \"plannedStart\": \"2023-10-20T17:12:41.345Z\",\n          \"plannedEnd\": \"1993-10-04T20:10:43.012Z\"\n        }\n      ],\n      \"carrier\": \"string\",\n      \"transportMode\": \"air\",\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"createdAt\": \"1967-07-27T12:42:24.631Z\"\n    },\n    {\n      \"references\": [\n        \"string\",\n        \"string\"\n      ],\n      \"stops\": [\n        {\n          \"type\": \"delivery\",\n          \"name\": \"string\",\n          \"address\": \"string\",\n          \"latitude\": 3287.8739588665153,\n          \"longitude\": 5843.5602280399125,\n          \"plannedStart\": \"1949-10-02T20:14:45.452Z\",\n          \"plannedEnd\": \"2017-08-09T09:18:36.644Z\"\n        },\n        {\n          \"type\": \"pickup\",\n          \"name\": \"string\",\n          \"address\": \"string\",\n          \"latitude\": 711.3821387186903,\n          \"longitude\": 2667.9608226962114,\n          \"plannedStart\": \"1955-06-08T00:54:39.912Z\",\n          \"plannedEnd\": \"1959-01-04T08:09:30.785Z\"\n        }\n      ],\n      \"carrier\": \"string\",\n      \"transportMode\": \"rail\",\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"createdAt\": \"2000-08-16T12:47:25.530Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b1deba7-a544-4564-8249-1d141de05b17",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2eca3ebc-d9c4-49bb-8e3d-8e8fbf64a4d4",
+          "name": "Create a transport order",
+          "request": {
+            "name": "Create a transport order",
+            "description": {
+              "content": "MODELED. Submits a new transport order (tour) - origin, destination, stops, references, carrier, and planned times - for Shippeo to track and enrich with predictive ETAs and events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transport-orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e499d98d-7f4f-4a1d-85a1-68b626d17b40",
+              "name": "The created transport order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\",\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"createdAt\": \"2012-09-25T02:31:27.199Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "891ad2ed-f63a-4ce8-8e86-f78b34cffa3d",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f22b64a4-4de1-4e3e-8b01-e46c6dbf216b",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff786e6a-e240-4573-a3b7-72f0c4f58745",
+          "name": "Get a transport order",
+          "request": {
+            "name": "Get a transport order",
+            "description": {
+              "content": "MODELED. Retrieves a single transport order by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transport-orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cea18be6-e87d-4174-b50b-54c3b1609210",
+              "name": "The requested transport order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\",\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"createdAt\": \"2012-09-25T02:31:27.199Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a038f8be-86f9-4a67-aced-940895274b59",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0994192a-10fa-4954-971c-18010599c3d6",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93a64a94-9b99-4939-a7b9-b5be9971d443",
+          "name": "Update a transport order",
+          "request": {
+            "name": "Update a transport order",
+            "description": {
+              "content": "MODELED. Updates an existing transport order (references, stops, planned times).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transport-orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0cc353f7-5dce-4f5f-b20d-ea20996d2e3a",
+              "name": "The updated transport order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\",\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"createdAt\": \"2012-09-25T02:31:27.199Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57b450f1-dd79-4b8a-90d5-e1547d234481",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01b0b691-f6df-49a6-ba0e-e36f30d352af",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b38c8d65-b2d8-4f85-b0d9-c77221508cc3",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stops\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"plannedStart\": \"<dateTime>\",\n      \"plannedEnd\": \"<dateTime>\"\n    }\n  ],\n  \"carrier\": \"<string>\",\n  \"transportMode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.shippeo.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4e59d19d-f0aa-4811-8744-2b5fabd18eac",
+    "name": "Shippeo Real-Time Transportation Visibility ETA and Status Transport Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shippeo is a real-time transportation and multimodal supply-chain visibility platform. Its public developer surface - documented in the login-gated Shippeo Developer Portal at developers.shippeo.com (a Redoc/Swagger-based portal) - lets carriers, shippers, TMS/ERP systems, and control towers submit transport orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs, statuses, and milestone events, and subscribe to real-time \"Events-out\" notifications via webhooks. Carbon emissions data for tracked shipments is also delivered through the Events-out API for enterprise customers.\nACCESS MODEL: Shippeo is enterprise, customer-provisioned SaaS. API access requires a contracted Shippeo account; applications and client IDs are created in the developer portal and calls are authenticated with an OAuth2 (client-credentials) access token presented as an HTTP Bearer token.\nGROUNDING NOTE: The live API host `https://api.shippeo.com` is confirmed (its `/health` endpoint responds `{\"http-server\":{\"healthy\":true}}`), as are OAuth2 Bearer authentication, webhook delivery, and the Events-out product. The individual operation PATHS and REQUEST/RESPONSE SCHEMAS below are MODELED from Shippeo's public product/marketing documentation because the exact Swagger definitions are behind the portal login; they illustrate the documented capabilities and are not byte-for-byte copies of Shippeo's private specs. Treat paths as representative, not verified.\n\nContact Support:\n Name: Shippeo Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

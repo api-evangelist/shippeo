@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shippeo Real-Time Transportation Visibility ETA and Status Transport Orders API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transport Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List transport orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shippeo.com/transport-orders",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transport status."
+              }
+            ]
+          },
+          "docs": "MODELED. Lists transport orders (tours) submitted for tracking, with their current status, carrier, and ETA. Exact path and query parameters are defined in the login-gated portal Swagger."
+        },
+        {
+          "info": {
+            "name": "Create a transport order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shippeo.com/transport-orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "MODELED. Submits a new transport order (tour) - origin, destination, stops, references, carrier, and planned times - for Shippeo to track and enrich with predictive ETAs and events."
+        },
+        {
+          "info": {
+            "name": "Get a transport order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shippeo.com/transport-orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource identifier."
+              }
+            ]
+          },
+          "docs": "MODELED. Retrieves a single transport order by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a transport order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.shippeo.com/transport-orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "MODELED. Updates an existing transport order (references, stops, planned times)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

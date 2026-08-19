@@ -1,0 +1,323 @@
+{
+  "item": [
+    {
+      "id": "e1253ed6-46ce-4894-a75e-6f47b728005b",
+      "name": "ETA and Status",
+      "description": {
+        "content": "Retrieve predictive ETAs, statuses, and milestone events (Events-out, pull).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "09eb3ec7-0a1c-4977-a365-b4fd206e919b",
+          "name": "Service health check",
+          "request": {
+            "name": "Service health check",
+            "description": {
+              "content": "Public health probe. CONFIRMED live - responds with a small JSON body such as `{\"http-server\":{\"healthy\":true}}`. This is the only endpoint verified without authentication; all others below are modeled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5fdf84d-8454-458a-9285-5cf00032e1db",
+              "name": "Service is healthy.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 4106.403088412979,\n  \"key_1\": \"string\",\n  \"key_2\": true,\n  \"key_3\": 7741\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3632521-dbae-4671-9c71-fe76c6c72cf9",
+          "name": "Get predictive ETA",
+          "request": {
+            "name": "Get predictive ETA",
+            "description": {
+              "content": "MODELED. Returns Shippeo's predictive ETA and current status for a transport order, blended from carrier positions, routing, and historical patterns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transport-orders",
+                ":id",
+                "eta"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96aa8ee5-cd99-4637-a5cd-38d25c5eb684",
+              "name": "Predictive ETA and status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id",
+                    "eta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transportOrderId\": \"string\",\n  \"eta\": \"2014-05-23T07:16:10.832Z\",\n  \"status\": \"string\",\n  \"confidence\": \"string\",\n  \"delayMinutes\": 1286\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1efd6248-a797-4c2f-8ac0-d481d8b10a7c",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id",
+                    "eta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bdc800b-3e11-4caf-8a68-3f49353310ce",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transport-orders",
+                    ":id",
+                    "eta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.shippeo.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b629647c-e42c-45b7-b011-a91230992759",
+    "name": "Shippeo Real-Time Transportation Visibility ETA and Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shippeo is a real-time transportation and multimodal supply-chain visibility platform. Its public developer surface - documented in the login-gated Shippeo Developer Portal at developers.shippeo.com (a Redoc/Swagger-based portal) - lets carriers, shippers, TMS/ERP systems, and control towers submit transport orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs, statuses, and milestone events, and subscribe to real-time \"Events-out\" notifications via webhooks. Carbon emissions data for tracked shipments is also delivered through the Events-out API for enterprise customers.\nACCESS MODEL: Shippeo is enterprise, customer-provisioned SaaS. API access requires a contracted Shippeo account; applications and client IDs are created in the developer portal and calls are authenticated with an OAuth2 (client-credentials) access token presented as an HTTP Bearer token.\nGROUNDING NOTE: The live API host `https://api.shippeo.com` is confirmed (its `/health` endpoint responds `{\"http-server\":{\"healthy\":true}}`), as are OAuth2 Bearer authentication, webhook delivery, and the Events-out product. The individual operation PATHS and REQUEST/RESPONSE SCHEMAS below are MODELED from Shippeo's public product/marketing documentation because the exact Swagger definitions are behind the portal login; they illustrate the documented capabilities and are not byte-for-byte copies of Shippeo's private specs. Treat paths as representative, not verified.\n\nContact Support:\n Name: Shippeo Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}
