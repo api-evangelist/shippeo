@@ -11,6 +11,18 @@ description: Shippeo is a real-time transportation and multimodal supply-chain
   statuses, and milestone events, and subscribe to real-time "Events-out"
   notifications. API access is enterprise and customer-provisioned - applications
   and OAuth2 client IDs are created in the portal after contracting with Shippeo.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
