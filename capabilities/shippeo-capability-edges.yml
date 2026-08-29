@@ -1,0 +1,44 @@
+slug: shippeo
+provider: Shippeo
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: ETA and Status
+  spec_file: shippeo-eta-and-status-api-openapi.yml
+  capability_id: BC-2510.30
+  capability_id_l1: BC-2510
+  capability_name: ETA Prediction Management
+  confidence: 0.9
+  evidence: GET /transport-orders/{id}/eta  getTransportOrderEta  Get predictive ETA; schema Eta
+  reason: Retrieval of predictive ETA for a tracked transport on a real-time visibility platform maps
+    directly to ETA prediction management (the /health op is plumbing).
+- tag: Positions
+  spec_file: shippeo-positions-api-openapi.yml
+  capability_id: BC-2510.10
+  capability_id_l1: BC-2510
+  capability_name: Event Capture and Status Management
+  confidence: 0.75
+  evidence: POST /positions  submitPosition  Submit a position; GET /transport-orders/{id}/positions  List
+    positions for a transport
+  reason: Ingestion of GPS position feeds against transport orders is event/telemetry capture that feeds
+    shipment status resolution on a visibility platform.
+- tag: Transport Orders
+  spec_file: shippeo-transport-orders-api-openapi.yml
+  capability_id: BC-2510.20
+  capability_id_l1: BC-2510
+  capability_name: Shipment Tracking Management
+  confidence: 0.7
+  evidence: 'POST /transport-orders  createTransportOrder; vendor description: ''submit transport orders
+    (tours) for tracking'''
+  reason: Transport orders are registered in Shippeo purely so they can be tracked end-to-end across legs
+    and partners; this is the shipment tracking surface, not transport execution or dispatch.

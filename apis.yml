@@ -134,6 +134,9 @@ apis:
   - type: OpenCollection
     url: collections/shippeo.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/shippeo-capability-edges.yml
+  name: Shippeo Business Capability Map
 - type: AgenticAccess
   url: agentic-access/shippeo-agentic-access.yml
 - type: DomainSecurity
