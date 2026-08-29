@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Shippeo Real-Time Transportation Visibility ETA and Status Event Subscriptions API
+  title: Shippeo Real-Time Transportation Visibility Event Subscriptions API
   description: 'Shippeo is a real-time transportation and multimodal supply-chain visibility platform. Its public developer surface - documented in the login-gated Shippeo Developer Portal at developers.shippeo.com (a Redoc/Swagger-based portal) - lets carriers, shippers, TMS/ERP systems, and control towers submit transport orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs, statuses, and milestone events, and subscribe to real-time "Events-out" notifications via webhooks. Carbon emissions data for tracked shipments is also delivered through the Events-out API for enterprise customers.
 
     ACCESS MODEL: Shippeo is enterprise, customer-provisioned SaaS. API access requires a contracted Shippeo account; applications and client IDs are created in the developer portal and calls are authenticated with an OAuth2 (client-credentials) access token presented as an HTTP Bearer token.
@@ -87,42 +87,23 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+webhooks:
+  transportEvent:
+    post:
+      operationId: onTransportEvent
+      tags:
+      - Event Subscriptions
+      summary: Events-out event delivery
+      description: MODELED payload shape. Shippeo POSTs this callback to a subscribed URL when a tracked transport changes status, its predictive ETA updates, or a milestone (site arrival/departure) is reached.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransportEvent'
+      responses:
+        '200':
+          description: Acknowledged by the receiver.
 components:
-  schemas:
-    EventSubscription:
-      allOf:
-      - $ref: '#/components/schemas/EventSubscriptionInput'
-      - type: object
-        properties:
-          id:
-            type: string
-          active:
-            type: boolean
-    EventSubscriptionInput:
-      type: object
-      required:
-      - callbackUrl
-      - eventTypes
-      properties:
-        callbackUrl:
-          type: string
-          format: uri
-        eventTypes:
-          type: array
-          items:
-            type: string
-            enum:
-            - status.changed
-            - eta.updated
-            - milestone.reached
-            - carbon.reported
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid access token.
@@ -142,6 +123,54 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    TransportEvent:
+      type: object
+      properties:
+        eventType:
+          type: string
+        transportOrderId:
+          type: string
+        occurredAt:
+          type: string
+          format: date-time
+        payload:
+          type: object
+          additionalProperties: true
+    EventSubscriptionInput:
+      type: object
+      required:
+      - callbackUrl
+      - eventTypes
+      properties:
+        callbackUrl:
+          type: string
+          format: uri
+        eventTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - status.changed
+            - eta.updated
+            - milestone.reached
+            - carbon.reported
+    EventSubscription:
+      allOf:
+      - $ref: '#/components/schemas/EventSubscriptionInput'
+      - type: object
+        properties:
+          id:
+            type: string
+          active:
+            type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
   parameters:
     Id:
       name: id

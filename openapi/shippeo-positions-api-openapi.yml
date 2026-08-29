@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Shippeo Real-Time Transportation Visibility ETA and Status Positions API
+  title: Shippeo Real-Time Transportation Visibility Positions API
   description: 'Shippeo is a real-time transportation and multimodal supply-chain visibility platform. Its public developer surface - documented in the login-gated Shippeo Developer Portal at developers.shippeo.com (a Redoc/Swagger-based portal) - lets carriers, shippers, TMS/ERP systems, and control towers submit transport orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs, statuses, and milestone events, and subscribe to real-time "Events-out" notifications via webhooks. Carbon emissions data for tracked shipments is also delivered through the Events-out API for enterprise customers.
 
     ACCESS MODEL: Shippeo is enterprise, customer-provisioned SaaS. API access requires a contracted Shippeo account; applications and client IDs are created in the developer portal and calls are authenticated with an OAuth2 (client-credentials) access token presented as an HTTP Bearer token.
@@ -73,42 +73,6 @@ paths:
         '422':
           $ref: '#/components/responses/ValidationError'
 components:
-  schemas:
-    Position:
-      allOf:
-      - $ref: '#/components/schemas/PositionInput'
-      - type: object
-        properties:
-          source:
-            type: string
-            description: Origin of the position (telematics, mobile app, etc.).
-    PositionInput:
-      type: object
-      required:
-      - latitude
-      - longitude
-      - timestamp
-      properties:
-        transportOrderId:
-          type: string
-        vehicleId:
-          type: string
-        latitude:
-          type: number
-          format: float
-        longitude:
-          type: number
-          format: float
-        timestamp:
-          type: string
-          format: date-time
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid access token.
@@ -136,6 +100,42 @@ components:
       description: Resource identifier.
       schema:
         type: string
+  schemas:
+    PositionInput:
+      type: object
+      required:
+      - latitude
+      - longitude
+      - timestamp
+      properties:
+        transportOrderId:
+          type: string
+        vehicleId:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        timestamp:
+          type: string
+          format: date-time
+    Position:
+      allOf:
+      - $ref: '#/components/schemas/PositionInput'
+      - type: object
+        properties:
+          source:
+            type: string
+            description: Origin of the position (telematics, mobile app, etc.).
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http
