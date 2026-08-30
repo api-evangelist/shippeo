@@ -1,16 +1,16 @@
 ---
 kin_checks:
   slug: shippeo
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T140727
+  schema_version: 0.16.0
+  scored_at: '2026-08-29'
+  run_ts: 2026-08-29T213958
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.15.1.yml; counts below let you verify that.
+    in rubric/scoring-0.16.0.yml; counts below let you verify that.
   counts:
     total: 130
     earned: 36
-    partial: 3
-    missed: 67
+    partial: 4
+    missed: 66
     na: 24
   checks:
   - id: well_known_published
@@ -28,9 +28,6 @@ kin_checks:
   - id: examples_present
     status: missed
   - id: components_reuse
-    status: missed
-    detail: 0 of 4 openapi documents pass
-  - id: webhooks_or_callbacks
     status: missed
     detail: 0 of 4 openapi documents pass
   - id: asyncapi_present
@@ -154,6 +151,10 @@ kin_checks:
     status: missed
   - id: agentic_commerce
     status: missed
+  - id: webhooks_or_callbacks
+    status: partial
+    earned: 0.5
+    detail: 1 of 4 openapi documents pass
   - id: agentic_access
     status: partial
     earned: 2.5
