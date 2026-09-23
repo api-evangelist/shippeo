@@ -1,11 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Shippeo Real-Time Transportation Visibility Transport Orders API
-  description: 'Shippeo is a real-time transportation and multimodal supply-chain visibility platform. Its public developer surface - documented in the login-gated Shippeo Developer Portal at developers.shippeo.com (a Redoc/Swagger-based portal) - lets carriers, shippers, TMS/ERP systems, and control towers submit transport orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs, statuses, and milestone events, and subscribe to real-time "Events-out" notifications via webhooks. Carbon emissions data for tracked shipments is also delivered through the Events-out API for enterprise customers.
-
-    ACCESS MODEL: Shippeo is enterprise, customer-provisioned SaaS. API access requires a contracted Shippeo account; applications and client IDs are created in the developer portal and calls are authenticated with an OAuth2 (client-credentials) access token presented as an HTTP Bearer token.
-
-    GROUNDING NOTE: The live API host `https://api.shippeo.com` is confirmed (its `/health` endpoint responds `{"http-server":{"healthy":true}}`), as are OAuth2 Bearer authentication, webhook delivery, and the Events-out product. The individual operation PATHS and REQUEST/RESPONSE SCHEMAS below are MODELED from Shippeo''s public product/marketing documentation because the exact Swagger definitions are behind the portal login; they illustrate the documented capabilities and are not byte-for-byte copies of Shippeo''s private specs. Treat paths as representative, not verified.'
+  title: Shippeo Real-Time Transportation Visibility Transport…
+  description: Shippeo is a real-time transportation and multimodal supply-chain visibility platform.
   version: '1.0'
   contact:
     name: Shippeo Developer Portal
@@ -137,6 +133,12 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   responses:
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Missing or invalid access token.
       content:
@@ -145,12 +147,6 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: The request payload failed validation.
       content:
         application/json:
           schema:
@@ -181,19 +177,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Stop'
-    TransportOrder:
-      allOf:
-      - $ref: '#/components/schemas/TransportOrderInput'
-      - type: object
-        properties:
-          id:
-            type: string
-          status:
-            type: string
-            description: Current transport status.
-          createdAt:
-            type: string
-            format: date-time
     Stop:
       type: object
       properties:
@@ -218,6 +201,19 @@ components:
         plannedEnd:
           type: string
           format: date-time
+    TransportOrder:
+      allOf:
+      - $ref: '#/components/schemas/TransportOrderInput'
+      - type: object
+        properties:
+          id:
+            type: string
+          status:
+            type: string
+            description: Current transport status.
+          createdAt:
+            type: string
+            format: date-time
     Error:
       type: object
       properties:
