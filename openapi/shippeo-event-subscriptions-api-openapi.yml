@@ -100,55 +100,7 @@ webhooks:
         '200':
           description: Acknowledged by the receiver.
 components:
-  responses:
-    ValidationError:
-      description: The request payload failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    TransportEvent:
-      type: object
-      properties:
-        eventType:
-          type: string
-        transportOrderId:
-          type: string
-        occurredAt:
-          type: string
-          format: date-time
-        payload:
-          type: object
-          additionalProperties: true
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    EventSubscription:
-      allOf:
-      - $ref: '#/components/schemas/EventSubscriptionInput'
-      - type: object
-        properties:
-          id:
-            type: string
-          active:
-            type: boolean
     EventSubscriptionInput:
       type: object
       required:
@@ -167,6 +119,54 @@ components:
             - eta.updated
             - milestone.reached
             - carbon.reported
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    TransportEvent:
+      type: object
+      properties:
+        eventType:
+          type: string
+        transportOrderId:
+          type: string
+        occurredAt:
+          type: string
+          format: date-time
+        payload:
+          type: object
+          additionalProperties: true
+    EventSubscription:
+      allOf:
+      - $ref: '#/components/schemas/EventSubscriptionInput'
+      - type: object
+        properties:
+          id:
+            type: string
+          active:
+            type: boolean
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     Id:
       name: id

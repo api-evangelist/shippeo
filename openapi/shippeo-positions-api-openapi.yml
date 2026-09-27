@@ -70,8 +70,8 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   responses:
-    ValidationError:
-      description: The request payload failed validation.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -82,8 +82,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    ValidationError:
+      description: The request payload failed validation.
       content:
         application/json:
           schema:
@@ -97,14 +97,13 @@ components:
       schema:
         type: string
   schemas:
-    Position:
-      allOf:
-      - $ref: '#/components/schemas/PositionInput'
-      - type: object
-        properties:
-          source:
-            type: string
-            description: Origin of the position (telematics, mobile app, etc.).
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     PositionInput:
       type: object
       required:
@@ -125,13 +124,14 @@ components:
         timestamp:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
+    Position:
+      allOf:
+      - $ref: '#/components/schemas/PositionInput'
+      - type: object
+        properties:
+          source:
+            type: string
+            description: Origin of the position (telematics, mobile app, etc.).
   securitySchemes:
     bearerAuth:
       type: http
