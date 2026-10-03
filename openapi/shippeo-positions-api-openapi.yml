@@ -69,6 +69,42 @@ paths:
         '422':
           $ref: '#/components/responses/ValidationError'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Position:
+      allOf:
+      - $ref: '#/components/schemas/PositionInput'
+      - type: object
+        properties:
+          source:
+            type: string
+            description: Origin of the position (telematics, mobile app, etc.).
+    PositionInput:
+      type: object
+      required:
+      - latitude
+      - longitude
+      - timestamp
+      properties:
+        transportOrderId:
+          type: string
+        vehicleId:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        timestamp:
+          type: string
+          format: date-time
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -96,42 +132,6 @@ components:
       description: Resource identifier.
       schema:
         type: string
-  schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    PositionInput:
-      type: object
-      required:
-      - latitude
-      - longitude
-      - timestamp
-      properties:
-        transportOrderId:
-          type: string
-        vehicleId:
-          type: string
-        latitude:
-          type: number
-          format: float
-        longitude:
-          type: number
-          format: float
-        timestamp:
-          type: string
-          format: date-time
-    Position:
-      allOf:
-      - $ref: '#/components/schemas/PositionInput'
-      - type: object
-        properties:
-          source:
-            type: string
-            description: Origin of the position (telematics, mobile app, etc.).
   securitySchemes:
     bearerAuth:
       type: http

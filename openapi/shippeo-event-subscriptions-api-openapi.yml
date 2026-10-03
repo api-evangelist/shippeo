@@ -101,24 +101,6 @@ webhooks:
           description: Acknowledged by the receiver.
 components:
   schemas:
-    EventSubscriptionInput:
-      type: object
-      required:
-      - callbackUrl
-      - eventTypes
-      properties:
-        callbackUrl:
-          type: string
-          format: uri
-        eventTypes:
-          type: array
-          items:
-            type: string
-            enum:
-            - status.changed
-            - eta.updated
-            - milestone.reached
-            - carbon.reported
     Error:
       type: object
       properties:
@@ -139,6 +121,24 @@ components:
         payload:
           type: object
           additionalProperties: true
+    EventSubscriptionInput:
+      type: object
+      required:
+      - callbackUrl
+      - eventTypes
+      properties:
+        callbackUrl:
+          type: string
+          format: uri
+        eventTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - status.changed
+            - eta.updated
+            - milestone.reached
+            - carbon.reported
     EventSubscription:
       allOf:
       - $ref: '#/components/schemas/EventSubscriptionInput'
@@ -155,14 +155,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: The request payload failed validation.
+    Unauthorized:
+      description: Missing or invalid access token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid access token.
+    ValidationError:
+      description: The request payload failed validation.
       content:
         application/json:
           schema:
