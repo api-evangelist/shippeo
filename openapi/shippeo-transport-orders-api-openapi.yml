@@ -133,26 +133,30 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
-    Error:
+    Stop:
       type: object
       properties:
-        code:
+        type:
           type: string
-        message:
+          enum:
+          - pickup
+          - delivery
+        name:
           type: string
-    TransportOrder:
-      allOf:
-      - $ref: '#/components/schemas/TransportOrderInput'
-      - type: object
-        properties:
-          id:
-            type: string
-          status:
-            type: string
-            description: Current transport status.
-          createdAt:
-            type: string
-            format: date-time
+        address:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        plannedStart:
+          type: string
+          format: date-time
+        plannedEnd:
+          type: string
+          format: date-time
     TransportOrderInput:
       type: object
       required:
@@ -178,37 +182,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Stop'
-    Stop:
+    Error:
       type: object
       properties:
-        type:
+        code:
           type: string
-          enum:
-          - pickup
-          - delivery
-        name:
+        message:
           type: string
-        address:
-          type: string
-        latitude:
-          type: number
-          format: float
-        longitude:
-          type: number
-          format: float
-        plannedStart:
-          type: string
-          format: date-time
-        plannedEnd:
-          type: string
-          format: date-time
+    TransportOrder:
+      allOf:
+      - $ref: '#/components/schemas/TransportOrderInput'
+      - type: object
+        properties:
+          id:
+            type: string
+          status:
+            type: string
+            description: Current transport status.
+          createdAt:
+            type: string
+            format: date-time
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: Resource identifier.
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Missing or invalid access token.
       content:
@@ -221,14 +223,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      description: Resource identifier.
-      schema:
-        type: string
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

@@ -100,14 +100,15 @@ webhooks:
         '200':
           description: Acknowledged by the receiver.
 components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: Resource identifier.
+      schema:
+        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     TransportEvent:
       type: object
       properties:
@@ -139,6 +140,13 @@ components:
             - eta.updated
             - milestone.reached
             - carbon.reported
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     EventSubscription:
       allOf:
       - $ref: '#/components/schemas/EventSubscriptionInput'
@@ -149,12 +157,6 @@ components:
           active:
             type: boolean
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Missing or invalid access token.
       content:
@@ -167,14 +169,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      description: Resource identifier.
-      schema:
-        type: string
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
