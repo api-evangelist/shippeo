@@ -1,4 +1,4 @@
-# Shippeo (shippeo)
+# Shippeo
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,133 +64,124 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Shippeo is a real-time transportation and multimodal supply-chain visibility platform, giving shippers, carriers, and logistics teams predictive and real-time information for all their deliveries across road, rail, sea, and air. Through its developer portal ([developers.shippeo.com](https://developers.shippeo.com)) Shippeo exposes REST APIs and webhooks so TMS, ERP, and control-tower systems can submit transport orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs, statuses, and milestone events, and subscribe to real-time "Events-out" notifications.
+Shippeo is a real-time transportation and multimodal supply-chain visibility platform, giving shippers, carriers, and logistics teams predictive and real-time information for all their deliveries across road, rail, sea, and air. Through its developer portal (developers.shippeo.com) Shippeo exposes REST APIs and webhooks so TMS, ERP, and control-tower systems can submit transport orders (tours) for tracking, feed GPS positions, retrieve predictive ETAs, statuses, and milestone events, and subscribe to real-time "Events-out" notifications. API access is enterprise and customer-provisioned - applications and OAuth2 client IDs are created in the portal after contracting with Shippeo.
 
-## Access model (read first)
+**Areas:** Supply Chain · Transportation Visibility · Real-Time Visibility · Logistics · Shipment Tracking · ETA · Freight · Supply Chain Visibility · Software-as-a-Service
 
-Shippeo is **enterprise, customer-provisioned SaaS**. There is no self-service signup or public pricing for the API. You must have a contracted Shippeo account; API applications and OAuth2 client IDs are then created inside the developer portal, and calls are authenticated with an OAuth2 client-credentials access token presented as an HTTP `Bearer` token. The full Swagger/OpenAPI definitions are behind the portal login.
+## Shippeo on APIs.io
 
-**What is confirmed vs. modeled in this entry:**
+Everything profiled for Shippeo is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/shippeo/](https://apis.io/providers/shippeo/)** — or go straight to one of the APIs or properties below.
 
-- **Confirmed:** the live API host `https://api.shippeo.com` (its `/health` endpoint responds `{"http-server":{"healthy":true}}`); OAuth2 Bearer authentication; webhook / "Events-out" event delivery; real-time tracking with predictive ETAs across road, rail, sea, and air.
-- **Modeled (honest stub):** the individual operation paths and request/response schemas in the OpenAPI and collections. They are derived from Shippeo's public product and marketing documentation because the exact portal Swagger is login-gated. Treat paths as representative, not verified.
+### APIs (4)
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/shippeo/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/shippeo/refs/heads/main/apis.yml)
+- [Shippeo ETA and Status API](https://apis.io/apis/shippeo/shippeo-eta-and-status-api/) — Retrieve predictive ETAs, statuses, and milestone events (Events-out, pull).
+- [Shippeo Event Subscriptions API](https://apis.io/apis/shippeo/shippeo-event-subscriptions-api/) — Manage webhook subscriptions for real-time Events-out notifications.
+- [Shippeo Positions API](https://apis.io/apis/shippeo/shippeo-positions-api/) — Feed and retrieve geolocation positions for tracked transports.
+- [Shippeo Transport Orders API](https://apis.io/apis/shippeo/shippeo-transport-orders-api/) — Submit and manage transport orders (tours) for real-time tracking.
 
-## Tags
+### Published properties
 
-- Supply Chain
-- Transportation Visibility
-- Real-Time Visibility
-- Logistics
-- Shipment Tracking
-- ETA
-- Freight
-- Supply Chain Visibility
-- SaaS
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Timestamps
+#### Agentic access (1)
 
-- **Created:** 2026-07-12
-- **Modified:** 2026-07-12
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## APIs
+- [Shippeo Agentic Access](https://apis.io/agentic-access/shippeo/shippeo-agentic-access/)
 
-### Shippeo Transport Orders API
+#### Collections (5)
 
-Submit and manage transport orders (tours) for real-time tracking - origin, destination, stops, references, carrier, and planned times - which Shippeo enriches with predictive ETAs and milestone events.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://developers.shippeo.com/catalog/all](https://developers.shippeo.com/catalog/all)
-- **Base URL:** `https://api.shippeo.com`
+- [Shippeo Real-Time Transportation Visibility API](https://apis.io/collections/shippeo/open-shippeo/)
+- [Shippeo Real-Time Transportation Visibility ETA and Status API](https://apis.io/collections/shippeo/open-shippeo-eta-and-status-api/)
+- [Shippeo Real-Time Transportation Visibility ETA and Status Event Subscriptions API](https://apis.io/collections/shippeo/open-shippeo-event-subscriptions-api/)
+- [Shippeo Real-Time Transportation Visibility ETA and Status Positions API](https://apis.io/collections/shippeo/open-shippeo-positions-api/)
+- [Shippeo Real-Time Transportation Visibility ETA and Status Transport Orders API](https://apis.io/collections/shippeo/open-shippeo-transport-orders-api/)
 
-#### Tags
+#### Security (2)
 
-- Transport Orders
-- Shipment Tracking
-- Logistics
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Shippeo Authentication](https://apis.io/security/shippeo/shippeo-authentication/)
+- [Shippeo Domain Security](https://apis.io/security/shippeo/shippeo-domain-security/)
 
-- [Documentation](https://developers.shippeo.com)
-- [API Reference](https://developers.shippeo.com/catalog/all)
-- [OpenAPI](openapi/shippeo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/shippeo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/shippeo.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Shippeo Positions API
+Published plans, tiers and prices.
 
-Carrier position feed - submit GPS positions (latitude, longitude, timestamp) for vehicles and transports, and retrieve a transport's position history, so Shippeo can track shipments and recompute predictive ETAs.
+- [Shippeo Plans Pricing](https://apis.io/plans/shippeo/shippeo-plans-pricing/)
 
-- **Human URL:** [https://developers.shippeo.com/catalog/all](https://developers.shippeo.com/catalog/all)
-- **Base URL:** `https://api.shippeo.com`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Positions
-- Geolocation
-- Telematics
+- [Shippeo Rate Limits](https://apis.io/rate-limits/shippeo/shippeo-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://developers.shippeo.com)
-- [OpenAPI](openapi/shippeo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/shippeo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/shippeo.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Shippeo ETA and Status API
+- [Shippeo Finops](https://apis.io/finops/shippeo/shippeo-finops/)
 
-Retrieve Shippeo's predictive ETAs, current statuses, and milestone events (site arrival/departure) for tracked transports - the pull side of the "Events-out" product, blended from carrier positions, routing, and historical patterns.
+## Where to find this API
 
-- **Human URL:** [https://developers.shippeo.com/catalog/all](https://developers.shippeo.com/catalog/all)
-- **Base URL:** `https://api.shippeo.com`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- ETA
-- Real-Time Visibility
-- Events
-
-#### Properties
-
-- [Documentation](https://developers.shippeo.com)
-- [OpenAPI](openapi/shippeo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/shippeo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/shippeo.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Shippeo Event Subscriptions (Events-out Webhooks) API
-
-Manage Events-out webhook subscriptions - register callback URLs and event types (status changes, ETA updates, milestone events, carbon-emissions data) so Shippeo POSTs real-time notifications to your systems.
-
-- **Human URL:** [https://developers.shippeo.com/catalog/all](https://developers.shippeo.com/catalog/all)
-- **Base URL:** `https://api.shippeo.com`
-
-#### Tags
-
-- Webhooks
-- Events
-- Real-Time Visibility
-
-#### Properties
-
-- [Documentation](https://developers.shippeo.com)
-- [OpenAPI](openapi/shippeo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/shippeo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/shippeo.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Domain Security](security/shippeo-domain-security.yml)
-- [Authentication](authentication/shippeo-authentication.yml)
 - [Website](https://www.shippeo.com)
 - [Documentation](https://developers.shippeo.com)
-- [Sign Up](https://developers.shippeo.com)
-- [Status Page](https://shippeo.statuspage.io)
-- [LinkedIn](https://www.linkedin.com/company/shippeo)
-- [Plans](plans/shippeo-plans-pricing.yml)
-- [Rate Limits](rate-limits/shippeo-rate-limits.yml)
-- [Fin Ops](finops/shippeo-finops.yml)
+- [Sign up](https://developers.shippeo.com)
+- [Status](https://shippeo.statuspage.io)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 13.1 |
+| Access clarity | 5.3 |
+
+**Agent readiness 22.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/shippeo/](https://apis.io/providers/shippeo/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Shippeo: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/shippeo/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
